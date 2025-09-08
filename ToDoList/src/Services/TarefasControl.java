@@ -23,8 +23,21 @@ public class TarefasControl {
         System.out.println("Digite o titulo:");
         Titulo = scan.nextLine();
 
-        System.out.println("Digite a descricao (digite \"FIM\" para encerra):");
-        Descricao = scan.nextLine();
+        System.out.println("Digite a descricao (digite \"FIM\", em uma linha separada, para encerrar):");
+
+        StringBuilder textoCompleto = new StringBuilder();
+
+        while(true){
+            String texto = scan.nextLine();
+
+            if("FIM".equals(texto)){
+                break;
+            }
+
+            textoCompleto.append(texto);
+        }
+
+        Descricao = textoCompleto.toString();
 
         if("".equals(Titulo) && "".equals(Descricao)){
             model.add(new Tarefa());
@@ -34,6 +47,8 @@ public class TarefasControl {
         }
 
         System.out.println("Sua tarefa foi criada com sucesso!");
+
+        scan.close();
 
     }
 
@@ -63,6 +78,8 @@ public class TarefasControl {
 
         }
 
+        leitor.close();
+
     }
 
     public void editarTitulo (int id){
@@ -78,7 +95,9 @@ public class TarefasControl {
 
                 System.out.println("O titulo foi modificado com sucesso!");
             }
-        }        
+        }    
+
+        scan.close();    
     }
 
     public void editarDescricao (int id){
@@ -87,8 +106,21 @@ public class TarefasControl {
         for(Tarefa obj : model) {
         
             if(obj.getId() == id) {
-                System.out.print("Digite a próxima descrição: ");
-                String novaDescricao = leitor.nextLine();
+                System.out.print("Digite a nova descricao (digite \"FIM\", em uma linha separada, para encerrar):");
+
+                StringBuilder textoCompleto = new StringBuilder();
+
+                while(true){
+                    String texto = leitor.nextLine();
+
+                    if("FIM".equals(texto)){
+                        break;
+                    }
+
+                    textoCompleto.append(texto);
+                }
+                
+                String novaDescricao = textoCompleto.toString();
                 
                 obj.setDescricao(novaDescricao);
                 
@@ -96,6 +128,8 @@ public class TarefasControl {
             } 
 
         }
+
+        leitor.close();
         
     }
 
