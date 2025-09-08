@@ -27,8 +27,55 @@ public class Tarefa {
 	}
 	
 	public Tarefa(int id, String titulo) {
-		this.id = id;
-		this.titulo = titulo;
 		this(id, titulo, "");
+		
 	}
+	public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public LocalDateTime getData_inicio() {
+        return data_inicio;
+    }
+
+    public void setData_inicio(LocalDateTime data_inicio) {
+        this.data_inicio = data_inicio;
+    }
+
+    public LocalDateTime getData_concluido() {
+        return data_concluido;
+    }
+
+    public void setData_concluido(LocalDateTime data_concluido) {
+        this.data_concluido = data_concluido;
+    }
+
+    public Boolean getConcluido() {
+        return concluido;
+    }
+
+    public void setConcluido(Boolean concluido) {
+        this.concluido = concluido;
+    }
 }
+
