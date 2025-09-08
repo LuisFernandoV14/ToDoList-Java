@@ -23,7 +23,7 @@ public class TarefasControl {
         System.out.println("Digite o titulo:");
         Titulo = scan.nextLine();
 
-        System.out.println("Digite a descricao:");
+        System.out.println("Digite a descricao (digite \"FIM\" para encerra):");
         Descricao = scan.nextLine();
 
         if("".equals(Titulo) && "".equals(Descricao)){
@@ -35,11 +35,9 @@ public class TarefasControl {
 
         System.out.println("Sua tarefa foi criada com sucesso!");
 
-    };
+    }
 
     public void deletarTarefa (int id){
-        
-        // Qual id tu quer digitar pra deletar a tarefa
 
         Scanner leitor = new Scanner(System.in);
 
@@ -53,7 +51,7 @@ public class TarefasControl {
 
                 if (escolha == 'y') {
                     model.removeIf(f -> f.getId() == id);
-                    System.out.println("A tarefa foi excluída!"); // Vai ficar print ou println?
+                    System.out.println("A tarefa foi excluída!");
 
                 } else  {
                     System.out.println("A tarefa não foi excluída.");
@@ -65,16 +63,40 @@ public class TarefasControl {
 
         }
 
-    };
+    }
 
-    public void editarTitulo (){
+    public void editarTitulo (int id){
+        Scanner scan = new Scanner(System.in);
 
-    };
+        for(Tarefa obj : model){
+            
+            if(obj.getId() == id){
+                System.out.println("Digite o novo título.");
+                String novoTitulo = scan.nextLine();
 
-    public void editarDescricao (){
+                obj.setTitulo(novoTitulo);
+
+                System.out.println("O titulo foi modificado com sucesso!");
+            }
+        }        
+    }
+
+    public void editarDescricao (int id){
+        Scanner leitor = new Scanner(System.in);
         
-    };
+        for(Tarefa obj : model) {
+        
+            if(obj.getId() == id) {
+                System.out.print("Digite a próxima descrição: ");
+                String novaDescricao = leitor.nextLine();
+                
+                obj.setDescricao(novaDescricao);
+                
+                System.out.println("A descrição foi modificada com sucesso!");
+            } 
 
-     System.out.println("Vasco da gama é o melhor time do Brasil, todos os jogadores são extremamente fodas e picas, um clube que conta com muitos anos de história e legado. Simplesmente o gigante do Brasil. O grande clube de futebol e regatas do Vasco da Gama conta com jogadores incríveis como Roberto Dinamite, Pablo Veggetti, Phelipe Coutinho e Ribamar (Hoje tem gol do ribamar, ribamar). Entretanto, ultimamente o time de regatas Vasco da gama está sendo roubado nos jogos do brasileirao 2025, em várias partidas houveram injustiças para com o gigante da colina, como o time é conhecido. É possível ver em partidas como contra o Sport e aquele jogo lá da expulsão do Léo Jardim (o goleiro do vasco), por isso, vamos todos cantar o hino do vasco: Vamos todos cantar de coração, vasco da gama é o meu pendão. Tu tens o nome do heroico português, vasco da gama sua fama assim se fez. Sua imensa torcida é bem feliz, norte sul norte sul desse brasil. Tua estrela, sempre a brilhar, etc.");
+        }
+        
+    }
 
 }
