@@ -9,11 +9,13 @@ public class Main {
 
     public static void main(String[] args){
         ArrayList<Tarefa> model = new ArrayList<>();
-        TarefasControl controller = new TarefasControl(model);
-        
         Scanner scan = new Scanner(System.in);
+        TarefasControl controller = new TarefasControl(model, scan);
 
-        while(true){
+        boolean loop = true;
+
+        while(loop){
+            System.out.println("\n\n\n");
             System.out.println("===========================================");
             System.out.println("|Selecione uma opcao:                     |");
             System.out.println("|1. Criar Tarefa                          |");
@@ -22,12 +24,16 @@ public class Main {
             System.out.println("|4. Editar Descrição                      |");
             System.out.println("|5. Concluir Tarefa                       |");
             System.out.println("|6. Listar Tarefas                        |");
+            System.out.println("|0. Sair                                  |");
             System.out.println("===========================================");
 
-            String optStr = scan.nextLine();
-            int opt = Integer.parseInt(optStr);
+            int opt = scan.nextInt();
+            scan.nextLine();
 
             switch(opt){
+                case 0:
+                    loop = false;
+                    break;
                 case 1:
                     controller.criarTarefa();
                     break;
@@ -51,15 +57,8 @@ public class Main {
                     break;        
             }
 
-            int buffer = scan.nextInt();
-            scan.nextLine();
-
-            System.out.println("Deseja continuar? [y/n]");
-            String cont = scan.nextLine();
-
-            if("n".equals(cont)){
-                break;
-            }
         }
+
+        scan.close();
     }
 }
