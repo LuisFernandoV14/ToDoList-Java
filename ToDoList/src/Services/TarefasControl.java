@@ -3,6 +3,7 @@ package Services;
 import Model.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public class TarefasControl {
 
@@ -52,9 +53,12 @@ public class TarefasControl {
 
     }
 
-    public void deletarTarefa (int id){
+    public void deletarTarefa (){
 
         Scanner leitor = new Scanner(System.in);
+
+        System.out.println("Digite o id da tarefa.");
+        int id = leitor.nextInt();
 
         for(Tarefa obj : model) {
 
@@ -68,10 +72,7 @@ public class TarefasControl {
                     model.removeIf(f -> f.getId() == id);
                     System.out.println("A tarefa foi excluída!");
 
-                } else  {
-                    System.out.println("A tarefa não foi excluída.");
-                    // Aqui dá pra botar um return dependendo de como ficar o método que chama esse método.
-
+                    return;
                 }
 
             }
@@ -80,10 +81,16 @@ public class TarefasControl {
 
         leitor.close();
 
+        System.out.println("Tarefa não existe.");
+        return;
+        
     }
 
-    public void editarTitulo (int id){
+    public void editarTitulo (){
         Scanner scan = new Scanner(System.in);
+
+        System.out.println("Digite o id da tarefa.");
+        int id = scan.nextInt();
 
         for(Tarefa obj : model){
             
@@ -94,14 +101,21 @@ public class TarefasControl {
                 obj.setTitulo(novoTitulo);
 
                 System.out.println("O titulo foi modificado com sucesso!");
+                return;
             }
         }    
 
-        scan.close();    
+        scan.close();   
+
+        System.out.println("Tarefa não existe.");
+        return; 
     }
 
-    public void editarDescricao (int id){
+    public void editarDescricao (){
         Scanner leitor = new Scanner(System.in);
+
+        System.out.println("Digite o id da tarefa.");
+        int id = leitor.nextInt();
         
         for(Tarefa obj : model) {
         
@@ -125,12 +139,61 @@ public class TarefasControl {
                 obj.setDescricao(novaDescricao);
                 
                 System.out.println("A descrição foi modificada com sucesso!");
+
+                return;
             } 
 
         }
 
         leitor.close();
         
+
+        System.out.println("Tarefa não existe.");
+        return;
     }
 
+    public void concluirTarefa(){
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Digite o id da tarefa.");
+        int id = scan.nextInt();
+
+        for(Tarefa obj : model){
+
+            if(obj.getId() == id){
+                obj.setConcluido(true);
+                obj.setData_concluido(LocalDateTime.now());
+
+                System.out.println("Tarefa" + obj.getId() + "concluida com sucesso!");
+                return;
+            }
+
+        }
+
+        System.out.println("Tarefa não existe.");
+        return;
+    }
+
+    public void listarTarefas(){
+        int tamanho = model.size();
+
+        if(tamanho < 1){
+            System.out.println("Lista de tarefas não existe.");
+            return;
+        } 
+        else {
+
+            System.out.println("===============================================");
+            System.out.println("Atividades");
+            System.out.println("===============================================");
+
+            for(Tarefa obj : model){
+                System.out.println("Id:" + obj.getId() + "\n" + "Titulo:" + obj.getTitulo() + "\n" + "Descrição:" + obj.getDescricao() + "\n" + "Data Inicio:" + obj.getData_inicio() + "Data Concluido:" + obj.getData_concluido() + "\n" + "Concluido?" + obj.getConcluido());
+            }
+
+            System.out.println("===============================================");
+
+        }
+
+    }
 }
